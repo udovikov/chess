@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="gameCtrl">
+<head>
+    <meta charset="utf-8" />
+    <title>Chess</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="contents/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="contents/chess.css" />
+    <script type="text/javascript" src="scripts/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="/scripts/indexController.js"></script>
+</head>
+<body class="row-fluid back" ng-controller="indexController">
+    <div class="container">
+        <div class="block center alert menu">
+            <h3>MEAN Chess v.0.1
+                <a href='/auth/facebook' class="btn pull-right" ng-hide="isAuthenticated">Login</a>
+                <a href='/logout' class="btn pull-right" ng-show="isAuthenticated">Logout</a>
+            </h3>
+        </div>
+        <div class="block center alert alert-info">
+            <h4 class="text-center">Welcome in MEAN Chess v.0.1</h4>
+            <h5 class="text-center">MEAN stack:­ MongoDB, ExpressJS, AngularJS, and Node.js</h5>
+            <h5>Building web applications involves having to use different technologies and tools, 
+                dealing with database manipulation, server side operations, and also client side 
+                handling and displaying of the data that comes from the server.</h5>
+            <p>
+                Before starting a new project, all the tools and project structure has to be setup, 
+                which is a time consuming task. Using a framework or a stack for this task can speed up 
+                development and ease the work for the developer
+            </p>
+            <h5>What Is MEAN</h5>
+                        <p>
+                "MEAN is a fullstack JavaScript platform for modern web applications".This is how the authors of the MEAN 
+            stack define it on their website. It's very clear that MEAN is targeting all kinds of JavaScript developers 
+            (both server and client side) and also that it is a stack platform which, indicates that there are several 
+            components comprising it.
+            </p>
+            These components are:<br />
+            <ul>
+                <li>MongoDB</li>
+                <li>Express</li>
+                <li>AngularJS</li>
+                <li>NodeJS</li>
+            </ul>
+            <p>
+            As you can see, MEAN brings together four of the most used and appreciated technologies for JavaScript 
+            development, laying down the foundation for easily building complex web applications.
+                </p>
+            <div class="text-center">
+                <a href='/game' class="btn btn-primary" ng-show="isAuthenticated">Enter to game</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--		<a href='/logout' class="btn btn-success pull-right">Logout</a>-->

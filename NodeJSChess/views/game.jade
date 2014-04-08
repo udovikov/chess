@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	script(src='/scripts/chessboard-0.3.0.js')
+	script(src='/scripts/chess.js')
+	script(src='/socket.io/lib/socket.io.js')
+	link(rel='stylesheet', href='/contents/chess.css')
+	link(rel='stylesheet', href='/css/chessboard-0.3.0.css')
+	.span3
+	#board.boardSClass
+	.logBoard.alert.alert-success
+		.userBoard
+			p Welcome! 
+				|Now in game:
+				users(ng-repeat="user in userList")
+					{{user.name}}
+				p Log:
+				li(ng-repeat="step in gameLog")
+					|Figure:{{step.piece}}	Do step from:{{step.source}}	To:{{step.target}}

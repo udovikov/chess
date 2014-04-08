@@ -1,0 +1,22 @@
+.boardSClass{
+    width: 65%;
+    float:right;
+}
+
+.logBoard {
+    width: 28%;
+    height: 300px;
+    overflow: auto;
+}
+
+.stopwatch {
+    width: 28%;
+}
+
+.ng-hide {
+  display:block!important;
+  position:absolute;
+  top:-9999px;
+  left:-9999px;
+}
+

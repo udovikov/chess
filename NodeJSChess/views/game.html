@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="gameCtrl">
+<head>
+    <meta charset="utf-8" />
+    <title>Chess</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/chessboard-0.3.0.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="contents/chess.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="contents/bootstrap.css" />
+    <script type="text/javascript" src="scripts/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script type="text/javascript" src="/scripts/chess.js"></script>
+    <script type="text/javascript" src="/scripts/chessboard-0.3.0.js"></script>
+    <script type="text/javascript" src="http://udovikov-win8.nixsolutions.com:1337/socket.io/socket.io.js"></script>
+    <script src="/scripts/core.js"></script>
+    <script type="text/javascript" src="/scripts/stopwatch.js"></script>
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+</head>
+<body class="row-fluid  back" ng-controller="gameController">
+    <div class="container">
+        <div class="block center alert menu">
+            <h2>MEAN Chess v.0.1
+                    <a href='/logout' ng-click="logout()" class="btn pull-right">Logout</a>
+            </h2>
+        </div>
+        <div id="board" class="boardSClass alert alert-info"></div>
+        <div class="logBoard alert alert-info">
+            <div ng-hide="isCreated">
+                <p>
+                    You can start new game or join to available game.<br />
+                    If someone created game you will see it.
+                </p>
+                <p>
+                    <a href='#' ng-click="createNewGame()" class="btn btn-inverse btn-block">Create new Game</a>
+                    <a href='#' ng-click="showStatistic()" class="btn btn-inverse btn-block">Show statistic</a>
+                </p>
+                <ul class="unstyled">
+                    <li ng-repeat="game in availableGames"><a href="" class="btn btn-inverse btn-block" ng-click="joinToGame(game.roomId)">Connect to {{game.serverName}}</a></li>
+                </ul>
+            </div>
+            <div class="progress progress-striped active" ng-show="isWaitToConnection">
+                <div class="bar" style="width: 100%;">Wait for connection</div>
+            </div>
+            <div ng-show="isStarted">
+                <a href="#" ng-click="showModal = true;" class="btn btn-inverse btn-block">Save Game</a>
+                <a href="#" ng-click="exitGame()" class="btn btn-inverse btn-block">Exit Game</a>
+                <p>
+                    Now in game:
+                    <ul>
+                        <li ng-repeat="user in userList">{{user.name}}</li>
+                    </ul>
+                </p>
+                <p>
+                    Log:
+                    <ul class="unstyled">
+                        <li ng-repeat="step in gameLog">[{{step.timestamp}}] {{step.piece}} FROM: {{step.source}} TO: {{step.target}} (DUR.: {{step.stepDuration}}sec.)
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <!--HISTORY! -->
+            <div ng-show="isHistory">
+                <p>
+                    Was in game:
+                <ul>
+                    <li ng-repeat="user in userList">{{user.name}}</li>
+                </ul>
+                </p>
+                <a href="#" ng-click="exitGame()" class="btn btn-inverse btn-block">Back to Menu</a>
+                <a href="#" ng-click="startSimulation()" ng-hide="isSimulating" class="btn btn-inverse btn-block">Start simulation</a>
+<!--                <a href="#" ng-click="stopSimulation()" ng-show="isSimulating" class="btn btn-inverse btn-block">Stop simulation</a>-->
+                <p>
+                    Log:
+                    <ul class="unstyled">
+                        <li ng-repeat="step in gameLog">[{{step.timestamp}}] {{step.piece}} FROM: {{step.source}} TO: {{step.target}} (DUR.: {{step.stepDuration}}sec.)
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <!-- END OF HISTORY! -->
+        </div>
+        <div class="stopwatch alert alert-info" ng-show="isStarted">
+            <div class="inline">
+                <span id="time" class="btn"></span>&nbsp; 
+                <div class="btn-group">
+                    <input type="button" ng-disabled="!isWhiteTurn" class="btn" value="White Turn" />
+                    <input type="button" ng-disabled="isWhiteTurn" class="btn btn-inverse" value="Black Turn" />
+                </div>
+            </div>
+        </div>
+        <div class="logBoard alert alert-info" ng-show="isStarted">
+            <div class="input-append" style="padding-right: 14px;">
+                <input class="" ng-model="message" id="appendedInputButton" type="text" ng-keypress="onKeyPress()">
+                <button class="btn btn-inverse" ng-click="sendMessage()" type="button" title="Write message and click send">Send</button>
+            </div>
+            <ul class="unstyled">
+                <li ng-repeat="item in chat" class="text-info"><span>[{{item.user}}] </span>{{item.message}}
+                </li>
+            </ul>
+        </div>
+        <div class="logBoard alert alert-info" ng-hide="isStarted">
+            <ul class="unstyled">
+                <li ng-repeat="history in historiesList" class="marg"><a href="" class="btn btn-block" ng-click="showHistory(history)">History {{history.status}}</a></li>
+            </ul>
+        </div>
+        <div class="fb-share-button" data-href="https://udovikov-win8.nixsolutions.com:1337/" data-type="button_count"></div>
+    </div>
+    <!--POPUP SAVE-->
+    <div class="modal" id="myModal" role="dialog" tabindex="-1" ng-show="showModal" aria-hidden="true">
+        <div class="modal-header">
+            <h3 id="myModalLabel">Saving game</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                Please select name:
+                <input type="text" required ng-model="gameName" />
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group">
+                <button class="btn" ng-click="showModal = false;">Cancel</button>
+                <button ng-click="saveGame()" class="btn btn-inverse">Save Game</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade in" ng-show="showModal"></div>
+
+    <!--POPUP STATISTIC-->
+    <div class="modal" id="myStatisticModel" role="dialog" tabindex="-1" ng-show="showStatisticModal" aria-hidden="true">
+        <div class="modal-header btn-inverse">
+            <h3 id="H1">Statistic</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User name</th>
+                            <th>Battles count</th>
+                            <th>Wins</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="user in statisticUserList">
+                        <td>{{user.name}}</td>
+                        <td>{{user.battlesCount}}</td>
+                        <td>{{user.winInBattlesCount}}</td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group">
+                <button class="btn" ng-click="showStatisticModal = false;">Go Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade in" ng-show="showStatisticModal"></div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).resize(board.resize);
+    });
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_UK/all.js#xfbml=1&appId=1407452696183445";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</html>

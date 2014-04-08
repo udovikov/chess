@@ -1,0 +1,20 @@
+doctype html
+html(ng-app="gameCtrl")
+	head
+		title= pageTitle
+		link(rel='stylesheet', href='/contents/bootstrap.css')
+		script(src='/scripts/jquery-2.1.0.js')
+		script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+		script(src='/scripts/bootstrap.js')
+		script(src='/scripts/core.js')
+	body.row-fluid(ng-controller="gameController")
+		.container
+			.block.center.alert.alert-info
+				h2
+					.title
+					|MEAN Chess v.0.1
+					if !user
+						a(href='/auth/facebook').btn.btn-success.pull-right Login
+					else
+						a(href='/logout').btn.btn-success.pull-right Logout
+			block content

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>NodeJSChess</Name>
+    <RootNamespace>NodeJSChess</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>6c3d627b-b149-455c-aa4b-2e57fd5ddeb0</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <NodejsPort>1337</NodejsPort>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="account.js" />
+    <Compile Include="node_modules\express\benchmarks\middleware.js" />
+    <Compile Include="node_modules\express\lib\application.js" />
+    <Compile Include="node_modules\express\lib\express.js" />
+    <Compile Include="node_modules\express\lib\middleware.js" />
+    <Compile Include="node_modules\express\lib\request.js" />
+    <Compile Include="node_modules\express\lib\response.js" />
+    <Compile Include="node_modules\express\lib\router\index.js" />
+    <Compile Include="node_modules\express\lib\router\route.js" />
+    <Compile Include="node_modules\express\lib\utils.js" />
+    <Compile Include="node_modules\express\lib\view.js" />
+    <Compile Include="node_modules\express\node_modules\buffer-crc32\index.js" />
+    <Compile Include="node_modules\express\node_modules\buffer-crc32\tests\crc.test.js" />
+    <Compile Include="public\scripts\bootstrap.js" />
+    <Compile Include="public\scripts\chess.js" />
+    <Compile Include="public\scripts\chessboard-0.3.0.js" />
+    <Compile Include="public\scripts\core.js" />
+    <Compile Include="public\scripts\indexController.js" />
+    <Compile Include="public\scripts\jquery-2.1.0.js" />
+    <Compile Include="public\scripts\stopwatch.js" />
+    <Compile Include="server.js" />
+    <Content Include="index.html" />
+    <Content Include="node_modules\.bin\express" />
+    <Content Include="node_modules\.bin\express.cmd" />
+    <Content Include="node_modules\.bin\jade" />
+    <Content Include="node_modules\.bin\jade.cmd" />
+    <Content Include="node_modules\express\benchmarks\Makefile" />
+    <Content Include="node_modules\express\benchmarks\run" />
+    <Content Include="node_modules\express\bin\express" />
+    <Content Include="node_modules\express\node_modules\buffer-crc32\.npmignore" />
+    <Content Include="node_modules\express\node_modules\buffer-crc32\.travis.yml" />
+    <Content Include="package.json" />
+    <Content Include="public\contents\bootstrap.css" />
+    <Content Include="public\css\chessboard-0.3.0.css" />
+    <Content Include="public\css\chessboard-0.3.0.min.css" />
+    <Content Include="public\img\chesspieces\wikipedia\bB.png" />
+    <Content Include="public\img\chesspieces\wikipedia\bK.png" />
+    <Content Include="public\img\chesspieces\wikipedia\bN.png" />
+    <Content Include="public\img\chesspieces\wikipedia\bP.png" />
+    <Content Include="public\img\chesspieces\wikipedia\bQ.png" />
+    <Content Include="public\img\chesspieces\wikipedia\bR.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wB.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wK.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wN.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wP.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wQ.png" />
+    <Content Include="public\img\chesspieces\wikipedia\wR.png" />
+    <Content Include="README.md" />
+    <Content Include="views\game.jade" />
+    <Content Include="views\game\index.jade" />
+    <Content Include="views\game\layout.jade" />
+    <Content Include="views\index.html" />
+    <Content Include="views\index.jade" />
+    <Content Include="views\layout.jade" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node_modules\" />
+    <Folder Include="node_modules\.bin\" />
+    <Folder Include="node_modules\express\" />
+    <Folder Include="node_modules\express\benchmarks\" />
+    <Folder Include="node_modules\express\bin\" />
+    <Folder Include="node_modules\express\lib\" />
+    <Folder Include="node_modules\express\lib\router\" />
+    <Folder Include="node_modules\express\node_modules\" />
+    <Folder Include="node_modules\express\node_modules\buffer-crc32\" />
+    <Folder Include="node_modules\express\node_modules\buffer-crc32\tests\" />
+    <Folder Include="public\" />
+    <Folder Include="public\contents\" />
+    <Folder Include="public\css\" />
+    <Folder Include="public\img\" />
+    <Folder Include="public\img\chesspieces\" />
+    <Folder Include="public\img\chesspieces\wikipedia\" />
+    <Folder Include="public\scripts\" />
+    <Folder Include="views\" />
+    <Folder Include="views\game\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

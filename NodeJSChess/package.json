@@ -1,0 +1,21 @@
+{
+  "name": "NodeJSChess",
+  "version": "0.0.0",
+  "description": "NodeJSChess",
+  "main": "server.js",
+  "author": {
+    "name": "udovikov",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "^3.4.8",
+    "jade": "^1.3.0",
+    "passport-facebook": "^1.0.3",
+    "passport": "^0.2.0",
+    "chess.js": "^0.1.0",
+    "socket.io": "^0.9.16",
+    "mongoose": "^3.8.8",
+    "mongoose-unique-validator": "^0.3.0",
+    "facebook-open-graph": "^0.1.0"
+  }
+}
